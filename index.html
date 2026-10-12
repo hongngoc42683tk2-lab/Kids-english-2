@@ -359,134 +359,122 @@
 <script>
 /* ================================================================
    1. DỮ LIỆU TỪ VỰNG THEO CHỦ ĐỀ
-   ----------------------------------------------------------------
-   CÁCH THÊM TỪ:
-     { word: "từ tiếng anh", emoji: "🎯", ipa: "/phiên âm/", vi: "nghĩa tiếng Việt", img: "images/tenfile.png" }
-   - ipa, vi, img đều TUỲ CHỌN
-   - Nếu có img → hiện ảnh thật
-   - Nếu không có img → dùng emoji
    ================================================================ */
 const TOPICS = {
   animals: {
     name: "Động vật",
     emoji: "🐱",
     words: [
-      { word: "cat",      ipa: "/kæt/",          emoji: "🐱", vi: "con mèo" },
-      { word: "dog",      ipa: "/dɒɡ/",          emoji: "🐶", vi: "con chó" },
-      { word: "elephant", ipa: "/ˈelɪfənt/",     emoji: "🐘", vi: "con voi" },
-      { word: "fish",     ipa: "/fɪʃ/",          emoji: "🐟", vi: "con cá" },
-      { word: "bird",     ipa: "/bɜːd/",         emoji: "🐦", vi: "con chim" },
-      { word: "rabbit",   ipa: "/ˈræbɪt/",       emoji: "🐰", vi: "con thỏ" },
-      { word: "bear",     ipa: "/beə(r)/",       emoji: "🐻", vi: "con gấu" },
-      { word: "lion",     ipa: "/ˈlaɪən/",       emoji: "🦁", vi: "con sư tử" },
-      { word: "monkey",   ipa: "/ˈmʌŋki/",       emoji: "🐵", vi: "con khỉ" },
-      { word: "tiger",    ipa: "/ˈtaɪɡə(r)/",    emoji: "🐯", vi: "con hổ" },
-      { word: "cow",      ipa: "/kaʊ/",          emoji: "🐮", vi: "con bò" },
-      { word: "pig",      ipa: "/pɪɡ/",          emoji: "🐷", vi: "con lợn" },
-      { word: "duck",     ipa: "/dʌk/",          emoji: "🦆", vi: "con vịt" },
-      { word: "frog",     ipa: "/frɒɡ/",         emoji: "🐸", vi: "con ếch" },
-      { word: "bee",      ipa: "/biː/",          emoji: "🐝", vi: "con ong" }
+      { word: "cat",      ipa: "/kæt/",         emoji: "🐱", vi: "con mèo" },
+      { word: "dog",      ipa: "/dɒɡ/",         emoji: "🐶", vi: "con chó" },
+      { word: "elephant", ipa: "/ˈelɪfənt/",    emoji: "🐘", vi: "con voi" },
+      { word: "fish",     ipa: "/fɪʃ/",         emoji: "🐟", vi: "con cá" },
+      { word: "bird",     ipa: "/bɜːd/",        emoji: "🐦", vi: "con chim" },
+      { word: "rabbit",   ipa: "/ˈræbɪt/",      emoji: "🐰", vi: "con thỏ" },
+      { word: "bear",     ipa: "/beə(r)/",      emoji: "🐻", vi: "con gấu" },
+      { word: "lion",     ipa: "/ˈlaɪən/",      emoji: "🦁", vi: "con sư tử" },
+      { word: "monkey",   ipa: "/ˈmʌŋki/",      emoji: "🐵", vi: "con khỉ" },
+      { word: "tiger",    ipa: "/ˈtaɪɡə(r)/",   emoji: "🐯", vi: "con hổ" },
+      { word: "cow",      ipa: "/kaʊ/",         emoji: "🐮", vi: "con bò" },
+      { word: "pig",      ipa: "/pɪɡ/",         emoji: "🐷", vi: "con lợn" },
+      { word: "duck",     ipa: "/dʌk/",         emoji: "🦆", vi: "con vịt" },
+      { word: "frog",     ipa: "/frɒɡ/",        emoji: "🐸", vi: "con ếch" },
+      { word: "bee",      ipa: "/biː/",         emoji: "🐝", vi: "con ong" }
     ]
   },
-
   fruits: {
     name: "Rau củ quả",
     emoji: "🍎",
     words: [
-      { word: "Apple",      ipa: "/ˈæpl/",           emoji: "🍎", vi: "quả táo" },
-      { word: "Pear",       ipa: "/peə(r)/",         emoji: "🍐", vi: "quả lê" },
-      { word: "Lemon",      ipa: "/ˈlemən/",         emoji: "🍋", vi: "quả chanh" },
-      { word: "Cucumber",   ipa: "/ˈkjuːkʌmbə(r)/",  emoji: "🥒", vi: "quả dưa chuột" },
-      { word: "Orange",     ipa: "/ˈɒrɪndʒ/",        emoji: "🍊", vi: "quả cam" },
-      { word: "Pineapple",  ipa: "/ˈpaɪnæpl/",       emoji: "🍍", vi: "quả dứa" },
-      { word: "Mango",      ipa: "/ˈmæŋɡəʊ/",        emoji: "🥭", vi: "quả xoài" },
-      { word: "Banana",     ipa: "/bəˈnɑːnə/",       emoji: "🍌", vi: "quả chuối" },
-      { word: "Coconut",    ipa: "/ˈkəʊkənʌt/",      emoji: "🥥", vi: "quả dừa" },
-      { word: "Watermelon", ipa: "/ˈwɔːtəmelən/",    emoji: "🍉", vi: "quả dưa hấu" },
-      { word: "Strawberry", ipa: "/ˈstrɔːberi/",     emoji: "🍓", vi: "quả dâu tây" },
-      { word: "Carrot",     ipa: "/ˈkærət/",         emoji: "🥕", vi: "củ cà rốt" },
-      { word: "Tomato",     ipa: "/təˈmeɪtəʊ/",      emoji: "🍅", vi: "quả cà chua" },
-      { word: "Pumpkin",    ipa: "/ˈpʌmpkɪn/",       emoji: "🎃", vi: "quả bí ngô" },
-      { word: "Potato",     ipa: "/pəˈteɪtəʊ/",      emoji: "🥔", vi: "củ khoai tây" },
-      { word: "Onion",      ipa: "/ˈʌnjən/",         emoji: "🧅", vi: "củ hành tây" },
-      { word: "Eggplant",   ipa: "/ˈeɡplɑːnt/",      emoji: "🍆", vi: "quả cà tím" },
-      { word: "Star fruit", ipa: "/ˈstɑː fruːt/",    emoji: "⭐", vi: "quả khế" },
-      { word: "Peach",      ipa: "/piːtʃ/",          emoji: "🍑", vi: "quả đào" },
-      { word: "Kiwi",       ipa: "/ˈkiːwi/",         emoji: "🥝", vi: "quả kiwi" },
-      { word: "Cherry",     ipa: "/ˈtʃeri/",         emoji: "🍒", vi: "quả anh đào" },
-      { word: "Broccoli",   ipa: "/ˈbrɒkəli/",       emoji: "🥦", vi: "súp lơ xanh" }
+      { word: "Apple",      ipa: "/ˈæpl/",          emoji: "🍎", vi: "quả táo" },
+      { word: "Pear",       ipa: "/peə(r)/",        emoji: "🍐", vi: "quả lê" },
+      { word: "Lemon",      ipa: "/ˈlemən/",        emoji: "🍋", vi: "quả chanh" },
+      { word: "Cucumber",   ipa: "/ˈkjuːkʌmbə(r)/", emoji: "🥒", vi: "quả dưa chuột" },
+      { word: "Orange",     ipa: "/ˈɒrɪndʒ/",       emoji: "🍊", vi: "quả cam" },
+      { word: "Pineapple",  ipa: "/ˈpaɪnæpl/",      emoji: "🍍", vi: "quả dứa" },
+      { word: "Mango",      ipa: "/ˈmæŋɡəʊ/",       emoji: "🥭", vi: "quả xoài" },
+      { word: "Banana",     ipa: "/bəˈnɑːnə/",      emoji: "🍌", vi: "quả chuối" },
+      { word: "Coconut",    ipa: "/ˈkəʊkənʌt/",     emoji: "🥥", vi: "quả dừa" },
+      { word: "Watermelon", ipa: "/ˈwɔːtəmelən/",   emoji: "🍉", vi: "quả dưa hấu" },
+      { word: "Strawberry", ipa: "/ˈstrɔːberi/",    emoji: "🍓", vi: "quả dâu tây" },
+      { word: "Carrot",     ipa: "/ˈkærət/",        emoji: "🥕", vi: "củ cà rốt" },
+      { word: "Tomato",     ipa: "/təˈmeɪtəʊ/",     emoji: "🍅", vi: "quả cà chua" },
+      { word: "Pumpkin",    ipa: "/ˈpʌmpkɪn/",      emoji: "🎃", vi: "quả bí ngô" },
+      { word: "Potato",     ipa: "/pəˈteɪtəʊ/",     emoji: "🥔", vi: "củ khoai tây" },
+      { word: "Onion",      ipa: "/ˈʌnjən/",        emoji: "🧅", vi: "củ hành tây" },
+      { word: "Eggplant",   ipa: "/ˈeɡplɑːnt/",     emoji: "🍆", vi: "quả cà tím" },
+      { word: "Star fruit", ipa: "/ˈstɑː fruːt/",   emoji: "⭐", vi: "quả khế" },
+      { word: "Peach",      ipa: "/piːtʃ/",         emoji: "🍑", vi: "quả đào" },
+      { word: "Kiwi",       ipa: "/ˈkiːwi/",        emoji: "🥝", vi: "quả kiwi" },
+      { word: "Cherry",     ipa: "/ˈtʃeri/",        emoji: "🍒", vi: "quả anh đào" },
+      { word: "Broccoli",   ipa: "/ˈbrɒkəli/",      emoji: "🥦", vi: "súp lơ xanh" }
     ]
   },
-
   objects: {
     name: "Đồ vật",
     emoji: "📚",
     words: [
-      { word: "book",     ipa: "/bʊk/",          emoji: "📚", vi: "quyển sách" },
-      { word: "pencil",   ipa: "/ˈpensl/",       emoji: "✏️", vi: "bút chì" },
-      { word: "phone",    ipa: "/fəʊn/",         emoji: "📱", vi: "điện thoại" },
-      { word: "clock",    ipa: "/klɒk/",         emoji: "⏰", vi: "đồng hồ" },
-      { word: "ball",     ipa: "/bɔːl/",         emoji: "⚽", vi: "quả bóng" },
-      { word: "key",      ipa: "/kiː/",          emoji: "🔑", vi: "chìa khoá" },
-      { word: "gift",     ipa: "/ɡɪft/",         emoji: "🎁", vi: "món quà" },
-      { word: "umbrella", ipa: "/ʌmˈbrelə/",     emoji: "☂️", vi: "cái ô" },
-      { word: "bag",      ipa: "/bæɡ/",          emoji: "🎒", vi: "cái cặp" },
-      { word: "chair",    ipa: "/tʃeə(r)/",      emoji: "🪑", vi: "cái ghế" },
-      { word: "camera",   ipa: "/ˈkæmərə/",      emoji: "📷", vi: "máy ảnh" },
-      { word: "light",    ipa: "/laɪt/",         emoji: "💡", vi: "bóng đèn" }
+      { word: "book",     ipa: "/bʊk/",        emoji: "📚", vi: "quyển sách" },
+      { word: "pencil",   ipa: "/ˈpensl/",     emoji: "✏️", vi: "bút chì" },
+      { word: "phone",    ipa: "/fəʊn/",       emoji: "📱", vi: "điện thoại" },
+      { word: "clock",    ipa: "/klɒk/",       emoji: "⏰", vi: "đồng hồ" },
+      { word: "ball",     ipa: "/bɔːl/",       emoji: "⚽", vi: "quả bóng" },
+      { word: "key",      ipa: "/kiː/",        emoji: "🔑", vi: "chìa khoá" },
+      { word: "gift",     ipa: "/ɡɪft/",       emoji: "🎁", vi: "món quà" },
+      { word: "umbrella", ipa: "/ʌmˈbrelə/",   emoji: "☂️", vi: "cái ô" },
+      { word: "bag",      ipa: "/bæɡ/",        emoji: "🎒", vi: "cái cặp" },
+      { word: "chair",    ipa: "/tʃeə(r)/",    emoji: "🪑", vi: "cái ghế" },
+      { word: "camera",   ipa: "/ˈkæmərə/",    emoji: "📷", vi: "máy ảnh" },
+      { word: "light",    ipa: "/laɪt/",       emoji: "💡", vi: "bóng đèn" }
     ]
   },
-
   vehicles: {
     name: "Phương tiện",
     emoji: "🚗",
     words: [
-      { word: "car",        ipa: "/kɑː(r)/",         emoji: "🚗", vi: "ô tô" },
-      { word: "bus",        ipa: "/bʌs/",            emoji: "🚌", vi: "xe buýt" },
-      { word: "bike",       ipa: "/baɪk/",           emoji: "🚲", vi: "xe đạp" },
-      { word: "plane",      ipa: "/pleɪn/",          emoji: "✈️", vi: "máy bay" },
-      { word: "ship",       ipa: "/ʃɪp/",            emoji: "🚢", vi: "tàu thuỷ" },
-      { word: "train",      ipa: "/treɪn/",          emoji: "🚂", vi: "tàu hoả" },
-      { word: "rocket",     ipa: "/ˈrɒkɪt/",         emoji: "🚀", vi: "tên lửa" },
-      { word: "helicopter", ipa: "/ˈhelɪkɒptə(r)/",  emoji: "🚁", vi: "máy bay trực thăng" },
-      { word: "taxi",       ipa: "/ˈtæksi/",         emoji: "🚕", vi: "taxi" },
-      { word: "truck",      ipa: "/trʌk/",           emoji: "🚚", vi: "xe tải" }
+      { word: "car",        ipa: "/kɑː(r)/",        emoji: "🚗", vi: "ô tô" },
+      { word: "bus",        ipa: "/bʌs/",           emoji: "🚌", vi: "xe buýt" },
+      { word: "bike",       ipa: "/baɪk/",          emoji: "🚲", vi: "xe đạp" },
+      { word: "plane",      ipa: "/pleɪn/",         emoji: "✈️", vi: "máy bay" },
+      { word: "ship",       ipa: "/ʃɪp/",           emoji: "🚢", vi: "tàu thuỷ" },
+      { word: "train",      ipa: "/treɪn/",         emoji: "🚂", vi: "tàu hoả" },
+      { word: "rocket",     ipa: "/ˈrɒkɪt/",        emoji: "🚀", vi: "tên lửa" },
+      { word: "helicopter", ipa: "/ˈhelɪkɒptə(r)/", emoji: "🚁", vi: "trực thăng" },
+      { word: "taxi",       ipa: "/ˈtæksi/",        emoji: "🚕", vi: "taxi" },
+      { word: "truck",      ipa: "/trʌk/",          emoji: "🚚", vi: "xe tải" }
     ]
   },
-
   colors: {
     name: "Màu sắc",
     emoji: "🎨",
     words: [
-      { word: "red",    ipa: "/red/",    emoji: "🔴", vi: "màu đỏ" },
-      { word: "blue",   ipa: "/bluː/",   emoji: "🔵", vi: "màu xanh dương" },
-      { word: "yellow", ipa: "/ˈjeləʊ/", emoji: "🟡", vi: "màu vàng" },
-      { word: "green",  ipa: "/ɡriːn/",  emoji: "🟢", vi: "màu xanh lá" },
-      { word: "orange", ipa: "/ˈɒrɪndʒ/",emoji: "🟠", vi: "màu cam" },
-      { word: "purple", ipa: "/ˈpɜːpl/", emoji: "🟣", vi: "màu tím" },
-      { word: "brown",  ipa: "/braʊn/",  emoji: "🟤", vi: "màu nâu" },
-      { word: "black",  ipa: "/blæk/",   emoji: "⚫", vi: "màu đen" },
-      { word: "white",  ipa: "/waɪt/",   emoji: "⚪", vi: "màu trắng" }
+      { word: "red",    ipa: "/red/",     emoji: "🔴", vi: "màu đỏ" },
+      { word: "blue",   ipa: "/bluː/",    emoji: "🔵", vi: "màu xanh dương" },
+      { word: "yellow", ipa: "/ˈjeləʊ/",  emoji: "🟡", vi: "màu vàng" },
+      { word: "green",  ipa: "/ɡriːn/",   emoji: "🟢", vi: "màu xanh lá" },
+      { word: "orange", ipa: "/ˈɒrɪndʒ/", emoji: "🟠", vi: "màu cam" },
+      { word: "purple", ipa: "/ˈpɜːpl/",  emoji: "🟣", vi: "màu tím" },
+      { word: "brown",  ipa: "/braʊn/",   emoji: "🟤", vi: "màu nâu" },
+      { word: "black",  ipa: "/blæk/",    emoji: "⚫", vi: "màu đen" },
+      { word: "white",  ipa: "/waɪt/",    emoji: "⚪", vi: "màu trắng" }
     ]
   },
-
   numbers: {
     name: "Số đếm",
     emoji: "🔢",
     words: [
-      { word: "one",   ipa: "/wʌn/",   emoji: "1️⃣", vi: "số một" },
-      { word: "two",   ipa: "/tuː/",   emoji: "2️⃣", vi: "số hai" },
-      { word: "three", ipa: "/θriː/",  emoji: "3️⃣", vi: "số ba" },
-      { word: "four",  ipa: "/fɔː(r)/",emoji: "4️⃣", vi: "số bốn" },
-      { word: "five",  ipa: "/faɪv/",  emoji: "5️⃣", vi: "số năm" },
-      { word: "six",   ipa: "/sɪks/",  emoji: "6️⃣", vi: "số sáu" },
-      { word: "seven", ipa: "/ˈsevn/", emoji: "7️⃣", vi: "số bảy" },
-      { word: "eight", ipa: "/eɪt/",   emoji: "8️⃣", vi: "số tám" },
-      { word: "nine",  ipa: "/naɪn/",  emoji: "9️⃣", vi: "số chín" },
-      { word: "ten",   ipa: "/ten/",   emoji: "🔟", vi: "số mười" }
+      { word: "one",   ipa: "/wʌn/",    emoji: "1️⃣", vi: "số một" },
+      { word: "two",   ipa: "/tuː/",    emoji: "2️⃣", vi: "số hai" },
+      { word: "three", ipa: "/θriː/",   emoji: "3️⃣", vi: "số ba" },
+      { word: "four",  ipa: "/fɔː(r)/", emoji: "4️⃣", vi: "số bốn" },
+      { word: "five",  ipa: "/faɪv/",   emoji: "5️⃣", vi: "số năm" },
+      { word: "six",   ipa: "/sɪks/",   emoji: "6️⃣", vi: "số sáu" },
+      { word: "seven", ipa: "/ˈsevn/",  emoji: "7️⃣", vi: "số bảy" },
+      { word: "eight", ipa: "/eɪt/",    emoji: "8️⃣", vi: "số tám" },
+      { word: "nine",  ipa: "/naɪn/",   emoji: "9️⃣", vi: "số chín" },
+      { word: "ten",   ipa: "/ten/",    emoji: "🔟", vi: "số mười" }
     ]
   },
-
   body: {
     name: "Cơ thể",
     emoji: "👀",
@@ -503,7 +491,6 @@ const TOPICS = {
       { word: "bone",  ipa: "/bəʊn/",  emoji: "🦴",  vi: "xương" }
     ]
   },
-
   family: {
     name: "Gia đình",
     emoji: "👨‍👩‍👧",
@@ -537,4 +524,619 @@ let vietnameseVoice = null;
 
 function pickVoices() {
   const voices = speechSynthesis.getVoices();
-  const prefer = ["Google UK English Female","Google
+  const prefer = ["Google UK English Female","Google US English",
+                  "Samantha","Karen","Microsoft Zira","Microsoft Aria"];
+  englishVoice = null;
+  for (const name of prefer) {
+    const v = voices.find(v => v.name === name);
+    if (v) { englishVoice = v; break; }
+  }
+  if (!englishVoice) englishVoice = voices.find(v => v.lang && v.lang.startsWith("en")) || null;
+  vietnameseVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("vi")) || null;
+}
+speechSynthesis.onvoiceschanged = pickVoices;
+pickVoices();
+
+function speakWord(text, rate = 0.8) {
+  return new Promise((resolve) => {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = rate;
+    u.pitch = 1.25;
+    u.volume = 1;
+    if (englishVoice) u.voice = englishVoice;
+    u.onend = resolve;
+    u.onerror = resolve;
+    speechSynthesis.speak(u);
+    setTimeout(resolve, 2500);
+  });
+}
+
+function speakPraise(text, pitch = 1.35, rate = 0.95) {
+  return new Promise((resolve) => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "vi-VN";
+    u.rate = rate;
+    u.pitch = pitch;
+    u.volume = 1;
+    if (vietnameseVoice) u.voice = vietnameseVoice;
+    u.onend = resolve;
+    u.onerror = resolve;
+    speechSynthesis.speak(u);
+    setTimeout(resolve, 3000);
+  });
+}
+
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playDingSound() {
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    [880, 1320, 1760].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, now + i * 0.09);
+      gain.gain.exponentialRampToValueAtTime(0.28, now + i * 0.09 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.09 + 0.5);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now + i * 0.09);
+      osc.stop(now + i * 0.09 + 0.55);
+    });
+  } catch (e) {}
+}
+
+function playFanfareSound() {
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const notes = [
+      { f: 523.25, t: 0.00, dur: 0.18 },
+      { f: 659.25, t: 0.18, dur: 0.18 },
+      { f: 783.99, t: 0.36, dur: 0.18 },
+      { f: 1046.5, t: 0.54, dur: 0.45 }
+    ];
+    notes.forEach(n => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.value = n.f;
+      const start = now + n.t;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.25, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + n.dur);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + n.dur + 0.05);
+    });
+  } catch (e) {}
+}
+
+function playApplauseSound() {
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const duration = 1.6;
+    const sr = ctx.sampleRate;
+    const buf = ctx.createBuffer(1, sr * duration, sr);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < 55; i++) {
+      const t = Math.random() * (duration - 0.15);
+      const start = Math.floor(t * sr);
+      const clapLen = Math.floor(0.04 * sr);
+      for (let j = 0; j < clapLen; j++) {
+        data[start + j] += (Math.random() * 2 - 1) * (1 - j / clapLen) * 0.6;
+      }
+    }
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    const filter = ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.value = 1800;
+    filter.Q.value = 0.7;
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.55, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    src.connect(filter).connect(gain).connect(ctx.destination);
+    src.start(now);
+    src.stop(now + duration);
+  } catch (e) {}
+}
+
+function playWrongSound() {
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(320, now);
+    osc.frequency.exponentialRampToValueAtTime(120, now + 0.28);
+    gain.gain.setValueAtTime(0.22, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.32);
+  } catch (e) {}
+}
+
+/* ================================================================
+   3. BỘ NHỚ (localStorage)
+   ================================================================ */
+const STORAGE_KEY = "beHocTiengAnh_v3";
+
+let memory = {
+  score: 0,
+  streak: 0,
+  bestStreak: 0,
+  level: 1,
+  totalCorrect: 0,
+  totalWrong: 0,
+  currentTopic: "animals",
+  wordStats: {}
+};
+
+function loadMemory() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) memory = { ...memory, ...JSON.parse(raw) };
+  } catch (e) {}
+}
+function saveMemory() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(memory)); } catch (e) {}
+}
+function getWordStat(word) {
+  if (!memory.wordStats[word]) memory.wordStats[word] = { correct: 0, wrong: 0, lastSeen: 0 };
+  return memory.wordStats[word];
+}
+function getWordWeakness(word) {
+  const s = getWordStat(word);
+  const total = s.correct + s.wrong;
+  if (total === 0) return 1.5;
+  const accuracy = s.correct / total;
+  const hoursSince = (Date.now() - s.lastSeen) / 3600000;
+  return (1 - accuracy) * 3 + Math.min(hoursSince / 24, 2) + s.wrong * 0.5;
+}
+
+/* ================================================================
+   4. HÀM TIỆN ÍCH
+   ================================================================ */
+const randInt = n => Math.floor(Math.random() * n);
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = randInt(i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderChoiceContent(el, item) {
+  el.innerHTML = "";
+  if (item.img) {
+    const img = document.createElement("img");
+    img.src = item.img;
+    img.alt = item.word;
+    img.onerror = () => { el.textContent = item.emoji; };
+    el.appendChild(img);
+  } else {
+    el.textContent = item.emoji;
+  }
+}
+
+const PRAISES = [
+  { text: "Bé đã trả lời đúng rồi!",   pitch: 1.35, rate: 0.95 },
+  { text: "Bé giỏi quá đi thôi!",      pitch: 1.4,  rate: 0.95 },
+  { text: "Tuyệt vời! Bé làm đúng rồi!",pitch: 1.3, rate: 0.95 },
+  { text: "Bé thông minh lắm!",        pitch: 1.4,  rate: 1.0  },
+  { text: "Đúng rồi! Bé học nhanh quá!",pitch: 1.3, rate: 0.95 },
+  { text: "Chính xác! Bé giỏi lắm!",   pitch: 1.35, rate: 0.95 },
+  { text: "Bé ơi, bé làm đúng rồi!",   pitch: 1.3,  rate: 0.9  },
+  { text: "Ồ, bé giỏi quá!",           pitch: 1.45, rate: 1.0  }
+];
+
+const PRAISE_TEXTS = [
+  "🎉 Bé giỏi lắm! 🎉",
+  "🌟 Tuyệt vời! 🌟",
+  "🎊 Bé đúng rồi! 🎊",
+  "💯 Xuất sắc! 💯",
+  "🚀 Bé học siêu quá! 🚀",
+  "✨ Waooo, bé giỏi! ✨"
+];
+
+const WAOOO_PHRASES = [
+  { text: "Waooo! Bé giỏi quá!",   pitch: 1.5,  rate: 0.9 },
+  { text: "Waooo! Tuyệt vời!",     pitch: 1.5,  rate: 0.95 },
+  { text: "Ồ la la! Bé giỏi quá!", pitch: 1.55, rate: 0.9 },
+  { text: "Waooo! Bé siêu quá!",   pitch: 1.5,  rate: 0.9 }
+];
+
+/* ================================================================
+   5. LOGIC GAME
+   ================================================================ */
+const menuScreen = document.getElementById("menuScreen");
+const gameScreen = document.getElementById("gameScreen");
+const topicsGrid = document.getElementById("topicsGrid");
+const topicBadge = document.getElementById("topicBadge");
+const speakerBtn = document.getElementById("speakerBtn");
+const ipaDisplay = document.getElementById("ipaDisplay");
+const choicesEl  = document.getElementById("choices");
+const scoreEl    = document.getElementById("score");
+const streakEl   = document.getElementById("streak");
+const streakWrap = document.getElementById("streakEl");
+const hintEl     = document.getElementById("hint");
+const praiseEl   = document.getElementById("praise");
+const btnBack    = document.getElementById("btnBack");
+const resetBtn   = document.getElementById("resetBtn");
+
+let currentWord = null;
+let currentChoices = [];
+let correctIndex = 0;
+let locked = false;
+let wrongThisRound = 0;
+
+function showMenu() {
+  gameScreen.classList.remove("active");
+  menuScreen.style.display = "flex";
+  renderTopicsGrid();
+  speechSynthesis.cancel();
+}
+
+async function startTopic(topicKey) {
+  memory.currentTopic = topicKey;
+  saveMemory();
+  menuScreen.style.display = "none";
+  gameScreen.classList.add("active");
+
+  const topic = TOPICS[topicKey];
+  topicBadge.textContent = topic.emoji + " " + topic.name;
+  updateStats();
+
+  await newRound();
+}
+
+function renderTopicsGrid() {
+  topicsGrid.innerHTML = "";
+  for (const key in TOPICS) {
+    const t = TOPICS[key];
+    let known = 0;
+    t.words.forEach(w => {
+      const st = memory.wordStats[w.word];
+      if (st && st.correct > 0) known++;
+    });
+
+    const card = document.createElement("button");
+    card.className = "topic-card";
+    card.dataset.topic = key;
+    card.innerHTML =
+      '<div class="emoji">' + t.emoji + '</div>' +
+      '<div class="name">' + t.name + '</div>' +
+      '<div class="progress">' + known + '/' + t.words.length + ' từ</div>';
+    card.addEventListener("click", () => startTopic(key));
+    topicsGrid.appendChild(card);
+  }
+}
+
+function updateStats() {
+  scoreEl.textContent = memory.score;
+  streakEl.textContent = memory.streak;
+  if (memory.streak >= 3) streakWrap.classList.add("show");
+  else streakWrap.classList.remove("show");
+}
+
+function pickCorrectWord(topicWords) {
+  const weighted = topicWords.map(w => ({ w, weight: getWordWeakness(w.word) }));
+  const totalW = weighted.reduce((s, x) => s + x.weight, 0);
+  let r = Math.random() * totalW;
+  for (const x of weighted) {
+    r -= x.weight;
+    if (r <= 0) return x.w;
+  }
+  return weighted[weighted.length - 1].w;
+}
+
+function pickDistractors(correct, topicWords, count) {
+  const pool = [];
+  if (memory.level >= 2) {
+    for (const group of CONFUSING_GROUPS) {
+      if (group.includes(correct.word)) {
+        group.forEach(w => {
+          if (w !== correct.word) {
+            const found = topicWords.find(x => x.word === w);
+            if (found && !pool.find(p => p.word === w)) pool.push(found);
+          }
+        });
+      }
+    }
+  }
+  const others = shuffle(topicWords.filter(w =>
+    w.word !== correct.word && !pool.find(p => p.word === w.word)
+  ));
+  while (pool.length < count && others.length > 0) pool.push(others.pop());
+  return shuffle(pool).slice(0, count);
+}
+
+function getChoiceCount(topicWords) {
+  const maxChoices = Math.min(4, topicWords.length);
+  if (memory.level === 1) return Math.min(2, maxChoices);
+  if (memory.level === 2) return Math.min(3, maxChoices);
+  return memory.streak >= 3 ? maxChoices : Math.min(3, maxChoices);
+}
+
+function updateLevel() {
+  const total = memory.totalCorrect + memory.totalWrong;
+  if (total < 5) { memory.level = 1; return; }
+  const acc = memory.totalCorrect / total;
+  if (memory.totalCorrect >= 20 && acc >= 0.8) memory.level = 3;
+  else if (memory.totalCorrect >= 8 && acc >= 0.7) memory.level = 2;
+  else memory.level = 1;
+}
+
+async function newRound() {
+  locked = false;
+  wrongThisRound = 0;
+  ipaDisplay.textContent = "";
+  ipaDisplay.classList.remove("show");
+
+  const topic = TOPICS[memory.currentTopic];
+  const topicWords = topic.words;
+
+  if (topicWords.length < 2) {
+    hintEl.textContent = "⚠️ Chủ đề này cần ít nhất 2 từ!";
+    return;
+  }
+
+  const correctWord = pickCorrectWord(topicWords);
+  const choiceCount = getChoiceCount(topicWords);
+  const distractors = pickDistractors(correctWord, topicWords, choiceCount - 1);
+
+  currentChoices = shuffle([correctWord, ...distractors]);
+  correctIndex = currentChoices.findIndex(c => c.word === correctWord.word);
+  currentWord = correctWord;
+
+  choicesEl.innerHTML = "";
+  currentChoices.forEach((c, i) => {
+    const div = document.createElement("div");
+    div.className = "choice";
+    renderChoiceContent(div, c);
+    div.addEventListener("click", () => handleChoice(i, div));
+    choicesEl.appendChild(div);
+  });
+
+  hintEl.textContent = "👂 Nghe và chọn hình đúng nhé!";
+  hintEl.classList.remove("urgent");
+
+  await speakWord(correctWord.word, 0.8);
+
+  setTimeout(() => {
+    if (!locked && currentWord && wrongThisRound === 0) {
+      speakWord(currentWord.word, 0.75);
+    }
+  }, 2200);
+}
+
+async function handleChoice(index, el) {
+  if (locked) return;
+
+  if (index === correctIndex) {
+    locked = true;
+    el.classList.add("correct");
+    document.querySelectorAll(".choice").forEach(c => c.classList.add("disabled"));
+
+    memory.score++;
+    memory.streak++;
+    if (memory.streak > memory.bestStreak) memory.bestStreak = memory.streak;
+    memory.totalCorrect++;
+
+    const stat = getWordStat(currentWord.word);
+    stat.correct++;
+    stat.lastSeen = Date.now();
+
+    updateLevel();
+    updateStats();
+    saveMemory();
+
+    playDingSound();
+    launchFireworks();
+    showPraise();
+    setTimeout(() => playFanfareSound(), 150);
+    playApplauseSound();
+
+    const waooo = WAOOO_PHRASES[randInt(WAOOO_PHRASES.length)];
+    setTimeout(() => speakPraise(waooo.text, waooo.pitch, waooo.rate), 400);
+
+    await new Promise(r => setTimeout(r, 1500));
+    const praise = PRAISES[randInt(PRAISES.length)];
+    await speakPraise(praise.text, praise.pitch, praise.rate);
+
+    if (memory.streak >= 3 && memory.streak % 3 === 0) {
+      setTimeout(() => {
+        speakPraise("Waooo! Bé đúng " + memory.streak + " câu liên tiếp rồi!", 1.5, 0.92);
+      }, 500);
+    }
+
+    setTimeout(newRound, 900);
+
+  } else {
+    el.classList.add("wrong");
+    playWrongSound();
+    setTimeout(() => el.classList.remove("wrong"), 500);
+
+    wrongThisRound++;
+    memory.streak = 0;
+    memory.totalWrong++;
+    const stat = getWordStat(currentWord.word);
+    stat.wrong++;
+    stat.lastSeen = Date.now();
+    updateLevel();
+    updateStats();
+    saveMemory();
+
+    if (wrongThisRound >= 2) {
+      hintEl.textContent = "💡 Nghe kỹ nhé, hình này nè!";
+      hintEl.classList.add("urgent");
+      const correctEl = document.querySelectorAll(".choice")[correctIndex];
+      if (correctEl) {
+        correctEl.classList.add("hintGlow");
+        setTimeout(() => correctEl.classList.remove("hintGlow"), 4000);
+      }
+      speakWord(currentWord.word, 0.6);
+    }
+  }
+}
+
+speakerBtn.addEventListener("click", () => {
+  if (!currentWord || locked) return;
+  speakerBtn.classList.add("playing");
+
+  if (currentWord.ipa) {
+    ipaDisplay.textContent = currentWord.ipa + (currentWord.vi ? " — " + currentWord.vi : "");
+    ipaDisplay.classList.add("show");
+  }
+
+  speakWord(currentWord.word).then(() => {
+    speakerBtn.classList.remove("playing");
+    setTimeout(() => ipaDisplay.classList.remove("show"), 1500);
+  });
+});
+
+btnBack.addEventListener("click", showMenu);
+
+resetBtn.addEventListener("click", () => {
+  if (confirm("Xoá toàn bộ tiến độ và chơi lại từ đầu?")) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+});
+
+/* ================================================================
+   6. PHÁO HOA
+   ================================================================ */
+const canvas = document.getElementById("fireworks");
+const ctx2d  = canvas.getContext("2d");
+let sparks = [];
+let animId = null;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+const COLORS = ["#FF5252","#FFD740","#69F0AE","#40C4FF","#E040FB",
+                "#FFAB40","#FF4081","#B2FF59","#18FFFF","#FFEB3B"];
+
+function launchFireworks() {
+  const W = canvas.width, H = canvas.height;
+  const bursts = [
+    { x: W * 0.25, y: H * 0.30 },
+    { x: W * 0.75, y: H * 0.28 },
+    { x: W * 0.50, y: H * 0.22 },
+    { x: W * 0.15, y: H * 0.45 },
+    { x: W * 0.85, y: H * 0.45 }
+  ];
+  bursts.forEach((b, i) => setTimeout(() => createBurst(b.x, b.y), i * 160));
+  if (!animId) animateFireworks();
+}
+
+function createBurst(x, y) {
+  const count = 38 + randInt(18);
+  const baseColor = COLORS[randInt(COLORS.length)];
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.25;
+    const speed = 2.2 + Math.random() * 4.2;
+    sparks.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 1,
+      decay: 0.012 + Math.random() * 0.014,
+      color: Math.random() < 0.55 ? baseColor : COLORS[randInt(COLORS.length)],
+      size: 3 + Math.random() * 5
+    });
+  }
+  for (let i = 0; i < 8; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 1 + Math.random() * 2.5;
+    sparks.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 1,
+      decay: 0.02,
+      color: "#FFFFFF",
+      size: 2 + Math.random() * 3
+    });
+  }
+}
+
+function animateFireworks() {
+  ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = sparks.length - 1; i >= 0; i--) {
+    const s = sparks[i];
+    s.x += s.vx;
+    s.y += s.vy;
+    s.vy += 0.045;
+    s.vx *= 0.985;
+    s.vy *= 0.985;
+    s.life -= s.decay;
+    if (s.life <= 0) { sparks.splice(i, 1); continue; }
+
+    ctx2d.globalAlpha = Math.max(s.life, 0);
+    ctx2d.fillStyle = s.color;
+    ctx2d.beginPath();
+    ctx2d.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
+    ctx2d.fill();
+
+    ctx2d.globalAlpha = s.life * 0.4;
+    ctx2d.beginPath();
+    ctx2d.arc(s.x - s.vx * 2, s.y - s.vy * 2, s.size * s.life * 0.6, 0, Math.PI * 2);
+    ctx2d.fill();
+  }
+  ctx2d.globalAlpha = 1;
+  if (sparks.length > 0) animId = requestAnimationFrame(animateFireworks);
+  else {
+    ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+    animId = null;
+  }
+}
+
+/* ================================================================
+   7. CHỮ KHEN
+   ================================================================ */
+function showPraise() {
+  praiseEl.textContent = PRAISE_TEXTS[randInt(PRAISE_TEXTS.length)];
+  praiseEl.classList.remove("show");
+  void praiseEl.offsetWidth;
+  praiseEl.classList.add("show");
+}
+
+/* ================================================================
+   8. KHỞI ĐỘNG
+   ================================================================ */
+window.addEventListener("load", () => {
+  loadMemory();
+
+  document.body.addEventListener("pointerdown", function unlock() {
+    try { getAudioCtx().resume(); } catch (e) {}
+    try {
+      const warm = new SpeechSynthesisUtterance(" ");
+      warm.volume = 0;
+      speechSynthesis.speak(warm);
+    } catch (e) {}
+    document.body.removeEventListener("pointerdown", unlock);
+  });
+
+  showMenu();
+});
+</script>
+</body>
+</html>
