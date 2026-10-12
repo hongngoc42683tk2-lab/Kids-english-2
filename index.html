@@ -21,7 +21,6 @@
     padding: 12px;
   }
 
-  /* ============ MÀN HÌNH CHỌN CHỦ ĐỀ ============ */
   #menuScreen {
     display: flex;
     flex-direction: column;
@@ -91,7 +90,6 @@
   .topic-card[data-topic="body"]      { border-color: #66bb6a; box-shadow: 0 6px 0 #2e7d32; }
   .topic-card[data-topic="family"]    { border-color: #ec407a; box-shadow: 0 6px 0 #ad1457; }
 
-  /* ============ MÀN HÌNH CHƠI ============ */
   #gameScreen {
     display: none;
     flex-direction: column;
@@ -275,7 +273,6 @@
   }
   .choice.disabled { pointer-events: none; opacity: 0.85; }
 
-  /* ============ PHÁO HOA + KHEN ============ */
   #fireworks {
     position: fixed;
     inset: 0;
@@ -306,7 +303,6 @@
     100% { transform: translate(-50%,-90%) scale(0.9); opacity: 0; }
   }
 
-  /* ============ NÚT RESET ============ */
   #resetBtn {
     position: fixed;
     top: 10px;
@@ -329,14 +325,12 @@
 </head>
 <body>
 
-<!-- ============ MÀN HÌNH CHỌN CHỦ ĐỀ ============ -->
 <div id="menuScreen">
   <h1>🎈 Bé Học Tiếng Anh 🎈</h1>
   <p class="subtitle">👆 Chọn một chủ đề để bắt đầu nhé!</p>
   <div class="topics-grid" id="topicsGrid"></div>
 </div>
 
-<!-- ============ MÀN HÌNH CHƠI ============ -->
 <div id="gameScreen">
   <div class="top-bar">
     <button class="btn-back" id="btnBack">🏠 Chủ đề</button>
@@ -403,7 +397,7 @@ const TOPICS = {
       { word: "Potato",     ipa: "/pəˈteɪtəʊ/",     emoji: "🥔", vi: "củ khoai tây" },
       { word: "Onion",      ipa: "/ˈʌnjən/",        emoji: "🧅", vi: "củ hành tây" },
       { word: "Eggplant",   ipa: "/ˈeɡplɑːnt/",     emoji: "🍆", vi: "quả cà tím" },
-      { word: "Star fruit", ipa: "/ˈstɑː fruːt/",   emoji: "⭐", vi: "quả khế" },
+      { word: "Star fruit", ipa: "/ˈstɑː fruːt/",   emoji: "🍈", vi: "quả khế", img: "images/starfruit.png" },
       { word: "Peach",      ipa: "/piːtʃ/",         emoji: "🍑", vi: "quả đào" },
       { word: "Kiwi",       ipa: "/ˈkiːwi/",        emoji: "🥝", vi: "quả kiwi" },
       { word: "Cherry",     ipa: "/ˈtʃeri/",        emoji: "🍒", vi: "quả anh đào" },
@@ -507,7 +501,6 @@ const TOPICS = {
   }
 };
 
-/* Nhóm từ dễ nhầm — dùng để tạo câu hỏi khó ở cấp cao */
 const CONFUSING_GROUPS = [
   ["cat","dog","rabbit","bear","lion","tiger"],
   ["Apple","Pear","Lemon","Orange","Peach","Cherry"],
@@ -537,7 +530,6 @@ function pickVoices() {
 speechSynthesis.onvoiceschanged = pickVoices;
 pickVoices();
 
-/* Đọc từ tiếng Anh — trả về Promise khi đọc xong */
 function speakWord(text, rate = 0.8) {
   return new Promise((resolve) => {
     speechSynthesis.cancel();
@@ -560,7 +552,6 @@ function getAudioCtx() {
   return audioCtx;
 }
 
-/* 🎵 Tiếng "ting ting ting" */
 function playDingSound() {
   try {
     const ctx = getAudioCtx();
@@ -580,7 +571,6 @@ function playDingSound() {
   } catch (e) {}
 }
 
-/* 🎺 Fanfare "ta-da!" 4 nốt nhạc */
 function playFanfareSound() {
   try {
     const ctx = getAudioCtx();
@@ -607,7 +597,6 @@ function playFanfareSound() {
   } catch (e) {}
 }
 
-/* 👏 VỖ TAY THẬT TO — 2 lớp chồng nhau, dài 2.5 giây */
 function playApplauseSound() {
   try {
     const ctx = getAudioCtx();
@@ -616,8 +605,6 @@ function playApplauseSound() {
     const sr = ctx.sampleRate;
     const buf = ctx.createBuffer(1, sr * duration, sr);
     const data = buf.getChannelData(0);
-
-    // 120 tiếng vỗ tay chồng lên nhau (dày)
     for (let i = 0; i < 120; i++) {
       const t = Math.pow(Math.random(), 0.75) * (duration - 0.15);
       const start = Math.floor(t * sr);
@@ -629,8 +616,6 @@ function playApplauseSound() {
         data[start + j] += (Math.random() * 2 - 1) * decay * amplitude;
       }
     }
-
-    // Chuẩn hoá
     let max = 0;
     for (let i = 0; i < data.length; i++) {
       if (Math.abs(data[i]) > max) max = Math.abs(data[i]);
@@ -639,8 +624,6 @@ function playApplauseSound() {
       const norm = 0.9 / max;
       for (let i = 0; i < data.length; i++) data[i] *= norm;
     }
-
-    // Lớp 1: mid-band
     const src = ctx.createBufferSource();
     src.buffer = buf;
     const filter = ctx.createBiquadFilter();
@@ -655,8 +638,6 @@ function playApplauseSound() {
     src.connect(filter).connect(gain).connect(ctx.destination);
     src.start(now);
     src.stop(now + duration);
-
-    // Lớp 2: high-band (dày hơn)
     const src2 = ctx.createBufferSource();
     src2.buffer = buf;
     const filter2 = ctx.createBiquadFilter();
@@ -672,7 +653,6 @@ function playApplauseSound() {
   } catch (e) {}
 }
 
-/* Tiếng "bụp" khi sai */
 function playWrongSound() {
   try {
     const ctx = getAudioCtx();
@@ -691,7 +671,7 @@ function playWrongSound() {
 }
 
 /* ================================================================
-   3. BỘ NHỚ (localStorage)
+   3. BỘ NHỚ
    ================================================================ */
 const STORAGE_KEY = "beHocTiengAnh_v3";
 
@@ -754,7 +734,6 @@ function renderChoiceContent(el, item) {
   }
 }
 
-/* Chữ khen hiện trên màn hình */
 const PRAISE_TEXTS = [
   "🎉 Bé giỏi lắm! 🎉",
   "🌟 Tuyệt vời! 🌟",
@@ -932,7 +911,6 @@ async function handleChoice(index, el) {
   if (locked) return;
 
   if (index === correctIndex) {
-    /* ===== ĐÚNG ===== */
     locked = true;
     el.classList.add("correct");
     document.querySelectorAll(".choice").forEach(c => c.classList.add("disabled"));
@@ -950,26 +928,15 @@ async function handleChoice(index, el) {
     updateStats();
     saveMemory();
 
-    // 🎵 Ting ting ting
     playDingSound();
-
-    // 🎆 Pháo hoa
     launchFireworks();
-
-    // ✨ Chữ khen
     showPraise();
-
-    // 🎺 Fanfare "ta-da!"
     setTimeout(() => playFanfareSound(), 150);
-
-    // 👏 VỖ TAY THẬT TO (sau 0.3s để không chồng với fanfare)
     setTimeout(() => playApplauseSound(), 300);
 
-    // Chuyển câu mới sau 2.2 giây
     setTimeout(newRound, 2200);
 
   } else {
-    /* ===== SAI ===== */
     el.classList.add("wrong");
     playWrongSound();
     setTimeout(() => el.classList.remove("wrong"), 500);
@@ -997,7 +964,6 @@ async function handleChoice(index, el) {
   }
 }
 
-/* Nút nghe lại */
 speakerBtn.addEventListener("click", () => {
   if (!currentWord || locked) return;
   speakerBtn.classList.add("playing");
