@@ -6,81 +6,40 @@
 <title>Bé Học Tiếng Anh</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
     background: linear-gradient(160deg, #a8e6ff 0%, #d6f5d6 50%, #fff5cc 100%);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-x: hidden;
-    user-select: none;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    overflow-x: hidden; user-select: none;
     -webkit-tap-highlight-color: transparent;
     padding: 12px;
   }
 
-  #menuScreen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-  }
+  /* ============ MENU CHỦ ĐỀ ============ */
+  #menuScreen { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 900px; }
   #menuScreen h1 {
     font-size: clamp(24px, 5.5vw, 42px);
     color: #ff6b9d;
     text-shadow: 3px 3px 0 #fff, 5px 5px 0 rgba(0,0,0,0.1);
-    margin-bottom: 8px;
-    text-align: center;
+    margin-bottom: 8px; text-align: center;
   }
-  .subtitle {
-    font-size: clamp(14px, 3vw, 19px);
-    color: #4a90d9;
-    margin-bottom: 22px;
-    text-align: center;
-  }
-  .topics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: clamp(10px, 2.5vw, 18px);
-    width: 100%;
-    padding: 0 8px;
-  }
+  .subtitle { font-size: clamp(14px, 3vw, 19px); color: #4a90d9; margin-bottom: 22px; text-align: center; }
+  .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: clamp(10px, 2.5vw, 18px); width: 100%; padding: 0 8px; }
   .topic-card {
-    background: #fff;
-    border: 5px solid #7ed6a5;
-    border-radius: 22px;
-    padding: clamp(12px, 3vw, 20px) 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+    background: #fff; border: 5px solid #7ed6a5; border-radius: 22px;
+    padding: clamp(12px, 3vw, 20px) 10px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
     box-shadow: 0 6px 0 #5cb884, 0 10px 20px rgba(0,0,0,0.12);
     transition: transform 0.15s, box-shadow 0.15s;
-    text-align: center;
-    font-family: inherit;
+    text-align: center; font-family: inherit;
   }
   .topic-card:hover { transform: translateY(-4px) scale(1.03); }
-  .topic-card:active {
-    transform: translateY(4px) scale(1.01);
-    box-shadow: 0 2px 0 #5cb884;
-  }
-  .topic-card .emoji {
-    font-size: clamp(36px, 8vw, 52px);
-    line-height: 1;
-  }
-  .topic-card .name {
-    font-size: clamp(14px, 3vw, 18px);
-    font-weight: bold;
-    color: #2d6a4f;
-  }
-  .topic-card .progress {
-    font-size: clamp(11px, 2.3vw, 13px);
-    color: #888;
-  }
+  .topic-card:active { transform: translateY(4px) scale(1.01); box-shadow: 0 2px 0 #5cb884; }
+  .topic-card .emoji { font-size: clamp(36px, 8vw, 52px); line-height: 1; }
+  .topic-card .name { font-size: clamp(14px, 3vw, 18px); font-weight: bold; color: #2d6a4f; }
+  .topic-card .progress { font-size: clamp(11px, 2.3vw, 13px); color: #888; }
   .topic-card[data-topic="animals"]   { border-color: #ffb74d; box-shadow: 0 6px 0 #e69138; }
   .topic-card[data-topic="fruits"]    { border-color: #ef5350; box-shadow: 0 6px 0 #c62828; }
   .topic-card[data-topic="objects"]   { border-color: #42a5f5; box-shadow: 0 6px 0 #1565c0; }
@@ -90,247 +49,279 @@
   .topic-card[data-topic="body"]      { border-color: #66bb6a; box-shadow: 0 6px 0 #2e7d32; }
   .topic-card[data-topic="family"]    { border-color: #ec407a; box-shadow: 0 6px 0 #ad1457; }
 
-  #gameScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+  /* ============ GAME SCREEN ============ */
+  #gameScreen { display: none; flex-direction: column; align-items: center; width: 100%; }
   #gameScreen.active { display: flex; }
-
-  .top-bar {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  .top-bar { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; justify-content: center; }
   .btn-back {
-    background: #fff;
-    border: 3px solid #ffb3c6;
-    color: #ff4081;
-    font-family: inherit;
-    font-size: clamp(13px, 2.8vw, 16px);
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 0 #ffcfe0;
-    transition: transform 0.12s, box-shadow 0.12s;
+    background: #fff; border: 3px solid #ffb3c6; color: #ff4081;
+    font-family: inherit; font-size: clamp(13px, 2.8vw, 16px); font-weight: bold;
+    padding: 8px 16px; border-radius: 20px; cursor: pointer;
+    box-shadow: 0 4px 0 #ffcfe0; transition: transform 0.12s, box-shadow 0.12s;
   }
-  .btn-back:active {
-    transform: translateY(3px);
-    box-shadow: 0 1px 0 #ffcfe0;
-  }
-  .score {
-    font-size: clamp(15px, 3vw, 20px);
-    color: #4a90d9;
-    background: #fff;
-    padding: 6px 18px;
-    border-radius: 30px;
-    box-shadow: 0 4px 0 #c9e2f5;
-    font-weight: bold;
-  }
-  .streak {
-    font-size: clamp(15px, 3vw, 20px);
-    color: #f57c00;
-    background: #fff3e0;
-    padding: 6px 18px;
-    border-radius: 30px;
-    box-shadow: 0 4px 0 #ffe0b2;
-    font-weight: bold;
-    display: none;
-  }
+  .btn-back:active { transform: translateY(3px); box-shadow: 0 1px 0 #ffcfe0; }
+  .score { font-size: clamp(15px, 3vw, 20px); color: #4a90d9; background: #fff; padding: 6px 18px; border-radius: 30px; box-shadow: 0 4px 0 #c9e2f5; font-weight: bold; }
+  .streak { font-size: clamp(15px, 3vw, 20px); color: #f57c00; background: #fff3e0; padding: 6px 18px; border-radius: 30px; box-shadow: 0 4px 0 #ffe0b2; font-weight: bold; display: none; }
   .streak.show { display: inline-block; }
-  .topic-badge {
-    background: #fff;
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: clamp(13px, 2.8vw, 17px);
-    font-weight: bold;
-    color: #2d6a4f;
-    box-shadow: 0 4px 0 #d8f0e2;
-    margin-bottom: 10px;
-  }
-
+  .topic-badge { background: #fff; padding: 6px 16px; border-radius: 30px; font-size: clamp(13px, 2.8vw, 17px); font-weight: bold; color: #2d6a4f; box-shadow: 0 4px 0 #d8f0e2; margin-bottom: 10px; }
   .speaker-btn {
-    width: clamp(70px, 16vw, 100px);
-    height: clamp(70px, 16vw, 100px);
-    border-radius: 50%;
-    border: none;
+    width: clamp(70px, 16vw, 100px); height: clamp(70px, 16vw, 100px);
+    border-radius: 50%; border: none;
     background: radial-gradient(circle at 35% 30%, #ffe27a, #ffb300);
     box-shadow: 0 8px 0 #d98e00, 0 12px 25px rgba(0,0,0,0.2);
-    font-size: clamp(32px, 7vw, 46px);
-    cursor: pointer;
+    font-size: clamp(32px, 7vw, 46px); cursor: pointer;
     transition: transform 0.12s, box-shadow 0.12s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     margin-bottom: 4px;
   }
-  .speaker-btn:active {
-    transform: translateY(6px);
-    box-shadow: 0 2px 0 #d98e00, 0 4px 10px rgba(0,0,0,0.2);
-  }
+  .speaker-btn:active { transform: translateY(6px); box-shadow: 0 2px 0 #d98e00, 0 4px 10px rgba(0,0,0,0.2); }
   .speaker-btn.playing { animation: pulse 0.6s infinite alternate; }
-  @keyframes pulse {
-    from { transform: scale(1); }
-    to   { transform: scale(1.1); }
-  }
-
+  @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
   .ipa-display {
-    font-size: clamp(13px, 2.6vw, 18px);
-    color: #4a90d9;
-    font-weight: bold;
-    font-style: italic;
-    min-height: 22px;
-    margin-bottom: 6px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s;
+    font-size: clamp(13px, 2.6vw, 18px); color: #4a90d9; font-weight: bold; font-style: italic;
+    min-height: 22px; margin-bottom: 6px; text-align: center;
+    opacity: 0; transition: opacity 0.3s;
   }
   .ipa-display.show { opacity: 1; }
-
-  .hint {
-    font-size: clamp(13px, 2.6vw, 17px);
-    color: #7a7a7a;
-    margin-bottom: 16px;
-    text-align: center;
-    padding: 0 10px;
-    min-height: 22px;
-  }
+  .hint { font-size: clamp(13px, 2.6vw, 17px); color: #7a7a7a; margin-bottom: 16px; text-align: center; padding: 0 10px; min-height: 22px; }
   .hint.urgent { color: #ff5722; font-weight: bold; }
-
-  .choices {
-    display: flex;
-    gap: clamp(15px, 4vw, 45px);
-    padding: 0 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  .choices { display: flex; gap: clamp(15px, 4vw, 45px); padding: 0 15px; flex-wrap: wrap; justify-content: center; }
   .choice {
-    width: clamp(110px, 26vw, 180px);
-    height: clamp(110px, 26vw, 180px);
-    background: #fff;
-    border: 6px solid #7ed6a5;
-    border-radius: 28px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: clamp(110px, 26vw, 180px); height: clamp(110px, 26vw, 180px);
+    background: #fff; border: 6px solid #7ed6a5; border-radius: 28px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
     font-size: clamp(55px, 13vw, 95px);
     box-shadow: 0 8px 0 #5cb884, 0 12px 25px rgba(0,0,0,0.15);
     transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
-    position: relative;
-    overflow: hidden;
-    animation: fadeIn 0.4s ease;
-    padding: 6px;
+    position: relative; overflow: hidden;
+    animation: fadeIn 0.4s ease; padding: 6px;
   }
-  .choice img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.85); }
-    to   { opacity: 1; transform: scale(1); }
-  }
+  .choice img { width: 100%; height: 100%; object-fit: contain; }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
   .choice:hover { transform: scale(1.04); }
-  .choice:active {
-    transform: translateY(6px) scale(1.02);
-    box-shadow: 0 2px 0 #5cb884, 0 4px 10px rgba(0,0,0,0.15);
-  }
+  .choice:active { transform: translateY(6px) scale(1.02); box-shadow: 0 2px 0 #5cb884, 0 4px 10px rgba(0,0,0,0.15); }
   .choice.correct {
-    border-color: #ffd700;
-    background: #fffbe6;
+    border-color: #ffd700; background: #fffbe6;
     box-shadow: 0 0 0 8px rgba(255,215,0,0.35), 0 8px 0 #d9b400;
     animation: correctPop 0.5s ease;
   }
-  @keyframes correctPop {
-    0%   { transform: scale(1); }
-    40%  { transform: scale(1.18); }
-    100% { transform: scale(1.05); }
-  }
-  .choice.wrong {
-    border-color: #ff8a8a;
-    background: #fff0f0;
-    animation: shake 0.45s;
-  }
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    20%     { transform: translateX(-12px); }
-    40%     { transform: translateX(12px); }
-    60%     { transform: translateX(-8px); }
-    80%     { transform: translateX(8px); }
-  }
-  .choice.hintGlow {
-    animation: hintGlow 0.7s ease infinite alternate;
-  }
-  @keyframes hintGlow {
-    from { box-shadow: 0 8px 0 #5cb884, 0 0 0 0 rgba(255,235,59,0); }
-    to   { box-shadow: 0 8px 0 #5cb884, 0 0 0 16px rgba(255,235,59,0.4); }
-  }
+  @keyframes correctPop { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1.05); } }
+  .choice.wrong { border-color: #ff8a8a; background: #fff0f0; animation: shake 0.45s; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-12px); } 40% { transform: translateX(12px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } }
+  .choice.hintGlow { animation: hintGlow 0.7s ease infinite alternate; }
+  @keyframes hintGlow { from { box-shadow: 0 8px 0 #5cb884, 0 0 0 0 rgba(255,235,59,0); } to { box-shadow: 0 8px 0 #5cb884, 0 0 0 16px rgba(255,235,59,0.4); } }
   .choice.disabled { pointer-events: none; opacity: 0.85; }
-
-  #fireworks {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 999;
-  }
+  #fireworks { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
   #praise {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    font-size: clamp(26px, 6.5vw, 54px);
-    font-weight: bold;
-    color: #ff4081;
+    font-size: clamp(26px, 6.5vw, 54px); font-weight: bold; color: #ff4081;
     text-shadow: 4px 4px 0 #fff, 7px 7px 0 rgba(0,0,0,0.12);
-    z-index: 1000;
-    pointer-events: none;
-    white-space: nowrap;
-    text-align: center;
-    padding: 0 12px;
+    z-index: 1000; pointer-events: none;
+    white-space: nowrap; text-align: center; padding: 0 12px;
   }
   #praise.show { animation: praiseIn 1.8s ease forwards; }
   @keyframes praiseIn {
-    0%   { transform: translate(-50%,-50%) scale(0) rotate(-15deg); opacity: 0; }
-    35%  { transform: translate(-50%,-50%) scale(1.25) rotate(4deg); opacity: 1; }
-    50%  { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
-    80%  { transform: translate(-50%,-50%) scale(1.05); opacity: 1; }
+    0% { transform: translate(-50%,-50%) scale(0) rotate(-15deg); opacity: 0; }
+    35% { transform: translate(-50%,-50%) scale(1.25) rotate(4deg); opacity: 1; }
+    50% { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
+    80% { transform: translate(-50%,-50%) scale(1.05); opacity: 1; }
     100% { transform: translate(-50%,-90%) scale(0.9); opacity: 0; }
   }
 
-  #resetBtn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: rgba(255,255,255,0.9);
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    cursor: pointer;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Nút cài đặt + reset */
+  #settingsBtn, #resetBtn {
+    position: fixed; top: 10px;
+    background: rgba(255,255,255,0.9); border: 2px solid #ddd;
+    border-radius: 50%; width: 44px; height: 44px;
+    font-size: 20px; cursor: pointer; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    font-family: inherit;
+    transition: transform 0.15s;
+  }
+  #settingsBtn { right: 10px; }
+  #resetBtn { right: 62px; }
+  #settingsBtn:hover, #resetBtn:hover { background: #fff; border-color: #ff4081; transform: scale(1.1); }
+
+  /* ============ TRANG QUẢN LÝ TỪ VỰNG ============ */
+  #manageScreen {
+    display: none; flex-direction: column; align-items: center;
+    width: 100%; max-width: 900px; padding: 12px;
+    min-height: 100vh;
+  }
+  #manageScreen.active { display: flex; }
+
+  .manage-header {
+    width: 100%; display: flex; gap: 10px; align-items: center;
+    margin-bottom: 16px; flex-wrap: wrap; justify-content: center;
+  }
+  .manage-title {
+    font-size: clamp(20px, 4.5vw, 30px); color: #ff6b9d;
+    text-shadow: 3px 3px 0 #fff;
+    margin-bottom: 16px; text-align: center;
+  }
+  .manage-topic-select {
+    padding: 10px 16px; font-family: inherit;
+    font-size: clamp(14px, 3vw, 17px); font-weight: bold;
+    border: 3px solid #7ed6a5; border-radius: 16px;
+    background: #fff; color: #2d6a4f;
+    cursor: pointer; box-shadow: 0 4px 0 #5cb884;
+    outline: none;
+  }
+  .btn-primary, .btn-secondary, .btn-danger {
+    padding: 10px 20px; font-family: inherit;
+    font-size: clamp(14px, 3vw, 17px); font-weight: bold;
+    border-radius: 16px; cursor: pointer; border: none;
+    transition: transform 0.12s, box-shadow 0.12s;
+    margin: 4px;
+  }
+  .btn-primary {
+    background: #4caf50; color: #fff;
+    box-shadow: 0 5px 0 #2e7d32;
+  }
+  .btn-primary:active { transform: translateY(3px); box-shadow: 0 2px 0 #2e7d32; }
+  .btn-secondary {
+    background: #42a5f5; color: #fff;
+    box-shadow: 0 5px 0 #1565c0;
+  }
+  .btn-secondary:active { transform: translateY(3px); box-shadow: 0 2px 0 #1565c0; }
+  .btn-danger {
+    background: #ef5350; color: #fff;
+    box-shadow: 0 5px 0 #c62828;
+  }
+  .btn-danger:active { transform: translateY(3px); box-shadow: 0 2px 0 #c62828; }
+  .btn-small { padding: 6px 12px; font-size: 14px; }
+
+  /* Form thêm từ */
+  .add-form {
+    background: #fff; border-radius: 20px; padding: 18px;
+    box-shadow: 0 6px 0 #d8f0e2, 0 10px 25px rgba(0,0,0,0.08);
+    width: 100%; margin-bottom: 18px;
+    display: none;
+  }
+  .add-form.active { display: block; animation: slideDown 0.3s ease; }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .form-row {
+    display: flex; flex-direction: column; gap: 6px;
+    margin-bottom: 12px;
+  }
+  .form-row label {
+    font-size: 14px; font-weight: bold; color: #2d6a4f;
+  }
+  .form-row input[type="text"] {
+    padding: 12px 14px; font-family: inherit; font-size: 16px;
+    border: 3px solid #d8f0e2; border-radius: 12px;
+    outline: none; transition: border-color 0.2s;
+    background: #fafffd;
+  }
+  .form-row input[type="text"]:focus { border-color: #7ed6a5; }
+  .image-picker {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .image-preview {
+    width: 80px; height: 80px; border-radius: 16px;
+    border: 3px dashed #7ed6a5; background: #fafffd;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; overflow: hidden; flex-shrink: 0;
+  }
+  .image-preview img { width: 100%; height: 100%; object-fit: contain; }
+  .file-input-label {
+    display: inline-block; padding: 10px 16px;
+    background: #ffe27a; border-radius: 12px;
+    font-weight: bold; cursor: pointer;
+    box-shadow: 0 4px 0 #d9a800;
+    font-size: 14px; color: #5d4037;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .file-input-label:active { transform: translateY(3px); box-shadow: 0 1px 0 #d9a800; }
+  #imageInput { display: none; }
+  .form-buttons {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+  }
+
+  /* Danh sách từ vựng */
+  .word-list {
+    width: 100%; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .word-item {
+    background: #fff; border-radius: 16px; padding: 10px;
+    box-shadow: 0 4px 0 #e0e0e0, 0 6px 15px rgba(0,0,0,0.06);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; position: relative;
+    transition: transform 0.15s;
+  }
+  .word-item:hover { transform: translateY(-3px); }
+  .word-item .word-emoji {
+    font-size: 40px; line-height: 1;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .word-item .word-emoji img { width: 100%; height: 100%; object-fit: contain; }
+  .word-item .word-text {
+    font-size: 15px; font-weight: bold; color: #333;
+    text-align: center; word-break: break-word;
+  }
+  .word-item .word-vi {
+    font-size: 12px; color: #888; text-align: center;
+  }
+  .word-item .word-ipa {
+    font-size: 11px; color: #42a5f5; font-style: italic; text-align: center;
+  }
+  .word-item .delete-btn {
+    position: absolute; top: 4px; right: 4px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #ef5350; color: #fff; border: none;
+    font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 0 #c62828;
     font-family: inherit;
   }
-  #resetBtn:hover { background: #fff; border-color: #ff4081; }
+  .word-item .delete-btn:active { transform: translateY(2px); box-shadow: none; }
+
+  .empty-state {
+    width: 100%; text-align: center; padding: 40px 20px;
+    color: #999; font-size: 16px;
+  }
+
+  .manage-note {
+    font-size: 13px; color: #888; text-align: center;
+    margin-top: 18px; padding: 12px;
+    background: #fff9e6; border-radius: 12px;
+    width: 100%; line-height: 1.6;
+  }
+
+  /* Toast thông báo */
+  #toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #333; color: #fff;
+    padding: 12px 22px; border-radius: 30px;
+    font-weight: bold; font-size: 15px;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    max-width: 90vw; text-align: center;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+  #toast.success { background: #4caf50; }
+  #toast.error { background: #ef5350; }
 </style>
 </head>
 <body>
 
+<!-- ============ MENU CHỦ ĐỀ ============ -->
 <div id="menuScreen">
   <h1>🎈 Bé Học Tiếng Anh 🎈</h1>
   <p class="subtitle">👆 Chọn một chủ đề để bắt đầu nhé!</p>
   <div class="topics-grid" id="topicsGrid"></div>
 </div>
 
+<!-- ============ GAME ============ -->
 <div id="gameScreen">
   <div class="top-bar">
     <button class="btn-back" id="btnBack">🏠 Chủ đề</button>
@@ -338,26 +329,84 @@
     <div class="streak" id="streakEl">🔥 Chuỗi: <span id="streak">0</span></div>
   </div>
   <div class="topic-badge" id="topicBadge">🐱 Động vật</div>
-
   <button class="speaker-btn" id="speakerBtn" title="Nghe lại">🔊</button>
   <div class="ipa-display" id="ipaDisplay"></div>
   <div class="hint" id="hint">👂 Nghe và chọn hình đúng nhé!</div>
-
   <div class="choices" id="choices"></div>
 </div>
 
+<!-- ============ QUẢN LÝ TỪ VỰNG ============ -->
+<div id="manageScreen">
+  <div class="manage-title">⚙️ Quản lý từ vựng</div>
+  <div class="manage-header">
+    <button class="btn-back" id="btnBackFromManage">⬅️ Quay lại</button>
+    <select class="manage-topic-select" id="topicSelect"></select>
+    <button class="btn-primary" id="btnShowAddForm">➕ Thêm từ mới</button>
+  </div>
+
+  <div class="add-form" id="addForm">
+    <div class="form-row">
+      <label>🔤 Từ tiếng Anh *</label>
+      <input type="text" id="inputWord" placeholder="Ví dụ: Apple" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <label>🔊 Phiên âm IPA (không bắt buộc)</label>
+      <input type="text" id="inputIpa" placeholder="Ví dụ: /ˈæpl/" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <label>🇻🇳 Nghĩa tiếng Việt (không bắt buộc)</label>
+      <input type="text" id="inputVi" placeholder="Ví dụ: quả táo" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <label>🎨 Emoji (không bắt buộc)</label>
+      <input type="text" id="inputEmoji" placeholder="Ví dụ: 🍎 (chỉ 1 ký tự)" autocomplete="off" maxlength="4">
+    </div>
+    <div class="form-row">
+      <label>📷 Hoặc chọn ảnh từ máy</label>
+      <div class="image-picker">
+        <div class="image-preview" id="imagePreview">🍎</div>
+        <label class="file-input-label" for="imageInput">📁 Chọn ảnh</label>
+        <input type="file" id="imageInput" accept="image/*">
+        <button class="btn-danger btn-small" id="btnClearImage" style="display:none">❌ Xoá ảnh</button>
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button class="btn-primary" id="btnSaveWord">✅ Lưu từ</button>
+      <button class="btn-secondary" id="btnCancelAdd">❌ Huỷ</button>
+    </div>
+  </div>
+
+  <div class="word-list" id="wordList"></div>
+
+  <div class="manage-note">
+    💾 Từ vựng được lưu <b>trực tiếp trên máy này</b>, không mất khi tắt trình duyệt.<br>
+    📱 Muốn chuyển sang máy khác? Dùng nút <b>Xuất/Nhập</b> bên dưới để backup.
+    <div style="margin-top:12px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-secondary btn-small" id="btnExport">📤 Xuất file</button>
+      <label class="btn-secondary btn-small" for="importInput" style="display:inline-block; cursor:pointer; padding:6px 12px; border-radius:16px; color:#fff; background:#42a5f5; box-shadow: 0 5px 0 #1565c0; font-weight:bold;">
+        📥 Nhập file
+      </label>
+      <input type="file" id="importInput" accept=".json" style="display:none;">
+      <button class="btn-danger btn-small" id="btnResetAll">🗑️ Xoá hết</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nút cài đặt và reset -->
+<button id="settingsBtn" title="Quản lý từ vựng">⚙️</button>
+<button id="resetBtn" title="Xoá điểm, chơi lại">🔄</button>
+
 <canvas id="fireworks"></canvas>
 <div id="praise"></div>
-<button id="resetBtn" title="Xoá tiến độ, chơi lại từ đầu">🔄</button>
+<div id="toast"></div>
 
 <script>
 /* ================================================================
-   1. DỮ LIỆU TỪ VỰNG THEO CHỦ ĐỀ
+   1. DỮ LIỆU TỪ VỰNG MẶC ĐỊNH
    ================================================================ */
-const TOPICS = {
+const DEFAULT_TOPICS = {
   animals: {
-    name: "Động vật",
-    emoji: "🐱",
+    name: "Động vật", emoji: "🐱",
     words: [
       { word: "cat",      ipa: "/kæt/",         emoji: "🐱", vi: "con mèo" },
       { word: "dog",      ipa: "/dɒɡ/",         emoji: "🐶", vi: "con chó" },
@@ -377,8 +426,7 @@ const TOPICS = {
     ]
   },
   fruits: {
-    name: "Rau củ quả",
-    emoji: "🍎",
+    name: "Rau củ quả", emoji: "🍎",
     words: [
       { word: "Apple",      ipa: "/ˈæpl/",          emoji: "🍎", vi: "quả táo" },
       { word: "Pear",       ipa: "/peə(r)/",        emoji: "🍐", vi: "quả lê" },
@@ -397,7 +445,7 @@ const TOPICS = {
       { word: "Potato",     ipa: "/pəˈteɪtəʊ/",     emoji: "🥔", vi: "củ khoai tây" },
       { word: "Onion",      ipa: "/ˈʌnjən/",        emoji: "🧅", vi: "củ hành tây" },
       { word: "Eggplant",   ipa: "/ˈeɡplɑːnt/",     emoji: "🍆", vi: "quả cà tím" },
-      { word: "Star fruit", ipa: "/ˈstɑː fruːt/",   emoji: "🍈", vi: "quả khế", img: "images/starfruit.png" },
+      { word: "Star fruit", ipa: "/ˈstɑː fruːt/",   emoji: "🍈", vi: "quả khế" },
       { word: "Peach",      ipa: "/piːtʃ/",         emoji: "🍑", vi: "quả đào" },
       { word: "Kiwi",       ipa: "/ˈkiːwi/",        emoji: "🥝", vi: "quả kiwi" },
       { word: "Cherry",     ipa: "/ˈtʃeri/",        emoji: "🍒", vi: "quả anh đào" },
@@ -405,8 +453,7 @@ const TOPICS = {
     ]
   },
   objects: {
-    name: "Đồ vật",
-    emoji: "📚",
+    name: "Đồ vật", emoji: "📚",
     words: [
       { word: "book",     ipa: "/bʊk/",        emoji: "📚", vi: "quyển sách" },
       { word: "pencil",   ipa: "/ˈpensl/",     emoji: "✏️", vi: "bút chì" },
@@ -423,8 +470,7 @@ const TOPICS = {
     ]
   },
   vehicles: {
-    name: "Phương tiện",
-    emoji: "🚗",
+    name: "Phương tiện", emoji: "🚗",
     words: [
       { word: "car",        ipa: "/kɑː(r)/",        emoji: "🚗", vi: "ô tô" },
       { word: "bus",        ipa: "/bʌs/",           emoji: "🚌", vi: "xe buýt" },
@@ -439,8 +485,7 @@ const TOPICS = {
     ]
   },
   colors: {
-    name: "Màu sắc",
-    emoji: "🎨",
+    name: "Màu sắc", emoji: "🎨",
     words: [
       { word: "red",    ipa: "/red/",     emoji: "🔴", vi: "màu đỏ" },
       { word: "blue",   ipa: "/bluː/",    emoji: "🔵", vi: "màu xanh dương" },
@@ -454,8 +499,7 @@ const TOPICS = {
     ]
   },
   numbers: {
-    name: "Số đếm",
-    emoji: "🔢",
+    name: "Số đếm", emoji: "🔢",
     words: [
       { word: "one",   ipa: "/wʌn/",    emoji: "1️⃣", vi: "số một" },
       { word: "two",   ipa: "/tuː/",    emoji: "2️⃣", vi: "số hai" },
@@ -470,8 +514,7 @@ const TOPICS = {
     ]
   },
   body: {
-    name: "Cơ thể",
-    emoji: "👀",
+    name: "Cơ thể", emoji: "👀",
     words: [
       { word: "eye",   ipa: "/aɪ/",    emoji: "👁️", vi: "con mắt" },
       { word: "hand",  ipa: "/hænd/",  emoji: "✋",  vi: "bàn tay" },
@@ -486,8 +529,7 @@ const TOPICS = {
     ]
   },
   family: {
-    name: "Gia đình",
-    emoji: "👨‍👩‍👧",
+    name: "Gia đình", emoji: "👨‍👩‍👧",
     words: [
       { word: "baby",    ipa: "/ˈbeɪbi/",   emoji: "👶", vi: "em bé" },
       { word: "boy",     ipa: "/bɔɪ/",      emoji: "👦", vi: "bé trai" },
@@ -501,6 +543,7 @@ const TOPICS = {
   }
 };
 
+/* Nhóm từ dễ nhầm */
 const CONFUSING_GROUPS = [
   ["cat","dog","rabbit","bear","lion","tiger"],
   ["Apple","Pear","Lemon","Orange","Peach","Cherry"],
@@ -510,33 +553,122 @@ const CONFUSING_GROUPS = [
 ];
 
 /* ================================================================
-   2. ÂM THANH
+   2. STORAGE — Lưu từ vựng do phụ huynh thêm + tiến độ
+   ================================================================ */
+const CUSTOM_KEY = "beHocTiengAnh_customWords_v1";
+const MEMORY_KEY = "beHocTiengAnh_v4";
+
+/* TOPICS sẽ = mặc định + custom (do phụ huynh thêm) */
+let TOPICS = {};
+
+let memory = {
+  score: 0, streak: 0, bestStreak: 0, level: 1,
+  totalCorrect: 0, totalWrong: 0,
+  currentTopic: "animals",
+  wordStats: {}
+};
+
+/* Load tất cả */
+function loadAll() {
+  // 1. Copy topics mặc định (deep clone)
+  TOPICS = JSON.parse(JSON.stringify(DEFAULT_TOPICS));
+
+  // 2. Merge từ custom
+  try {
+    const raw = localStorage.getItem(CUSTOM_KEY);
+    if (raw) {
+      const custom = JSON.parse(raw);
+      for (const topicKey in custom) {
+        if (TOPICS[topicKey]) {
+          // Thêm vào chủ đề có sẵn
+          TOPICS[topicKey].words = TOPICS[topicKey].words.concat(custom[topicKey]);
+        } else {
+          // Tạo chủ đề mới (nếu phụ huynh thêm)
+          TOPICS[topicKey] = custom[topicKey];
+        }
+      }
+    }
+  } catch (e) { console.error("Lỗi load custom:", e); }
+
+  // 3. Load memory (điểm, streak)
+  try {
+    const raw = localStorage.getItem(MEMORY_KEY);
+    if (raw) memory = { ...memory, ...JSON.parse(raw) };
+  } catch (e) {}
+
+  // 4. Đảm bảo currentTopic tồn tại
+  if (!TOPICS[memory.currentTopic]) memory.currentTopic = "animals";
+}
+
+function saveMemory() {
+  try { localStorage.setItem(MEMORY_KEY, JSON.stringify(memory)); } catch (e) {}
+}
+
+/* Lưu từ vựng custom — chỉ lưu các từ KHÔNG có trong mặc định */
+function saveCustomWords() {
+  try {
+    const custom = {};
+    for (const topicKey in TOPICS) {
+      const defaultWords = DEFAULT_TOPICS[topicKey] ? DEFAULT_TOPICS[topicKey].words : [];
+      const defaultWordNames = new Set(defaultWords.map(w => w.word));
+
+      // Từ nào không có trong default → là custom
+      const customWords = TOPICS[topicKey].words.filter(w => !defaultWordNames.has(w.word));
+
+      if (customWords.length > 0) {
+        custom[topicKey] = customWords;
+      } else if (!DEFAULT_TOPICS[topicKey]) {
+        // Chủ đề hoàn toàn mới → lưu cả metadata + words
+        custom[topicKey] = TOPICS[topicKey];
+      }
+    }
+    localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom));
+  } catch (e) {
+    console.error("Lỗi save custom:", e);
+    showToast("❌ Lỗi lưu (có thể do ảnh quá lớn)", "error");
+  }
+}
+
+/* ================================================================
+   3. ÂM THANH
    ================================================================ */
 let englishVoice = null;
 let vietnameseVoice = null;
 
 function pickVoices() {
   const voices = speechSynthesis.getVoices();
-  const prefer = ["Google UK English Female","Google US English",
-                  "Samantha","Karen","Microsoft Zira","Microsoft Aria"];
+  const prefer = [
+    "Google US English",
+    "Microsoft Aria Online (Natural)",
+    "Microsoft Jenny Online (Natural)",
+    "Samantha",
+    "Google UK English Female",
+    "Karen",
+    "Microsoft Zira"
+  ];
   englishVoice = null;
   for (const name of prefer) {
     const v = voices.find(v => v.name === name);
     if (v) { englishVoice = v; break; }
   }
-  if (!englishVoice) englishVoice = voices.find(v => v.lang && v.lang.startsWith("en")) || null;
+  if (!englishVoice) {
+    englishVoice = voices.find(v => v.lang === "en-US")
+                || voices.find(v => v.lang && v.lang.startsWith("en-US"))
+                || voices.find(v => v.lang && v.lang.startsWith("en"))
+                || null;
+  }
   vietnameseVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("vi")) || null;
 }
 speechSynthesis.onvoiceschanged = pickVoices;
 pickVoices();
 
-function speakWord(text, rate = 0.8) {
+function speakWord(text, rate = 0.85) {
   return new Promise((resolve) => {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US";
     u.rate = rate;
-    u.pitch = 1.25;
+    u.pitch = 1.0;
     u.volume = 1;
     if (englishVoice) u.voice = englishVoice;
     u.onend = resolve;
@@ -671,44 +803,6 @@ function playWrongSound() {
 }
 
 /* ================================================================
-   3. BỘ NHỚ
-   ================================================================ */
-const STORAGE_KEY = "beHocTiengAnh_v3";
-
-let memory = {
-  score: 0,
-  streak: 0,
-  bestStreak: 0,
-  level: 1,
-  totalCorrect: 0,
-  totalWrong: 0,
-  currentTopic: "animals",
-  wordStats: {}
-};
-
-function loadMemory() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) memory = { ...memory, ...JSON.parse(raw) };
-  } catch (e) {}
-}
-function saveMemory() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(memory)); } catch (e) {}
-}
-function getWordStat(word) {
-  if (!memory.wordStats[word]) memory.wordStats[word] = { correct: 0, wrong: 0, lastSeen: 0 };
-  return memory.wordStats[word];
-}
-function getWordWeakness(word) {
-  const s = getWordStat(word);
-  const total = s.correct + s.wrong;
-  if (total === 0) return 1.5;
-  const accuracy = s.correct / total;
-  const hoursSince = (Date.now() - s.lastSeen) / 3600000;
-  return (1 - accuracy) * 3 + Math.min(hoursSince / 24, 2) + s.wrong * 0.5;
-}
-
-/* ================================================================
    4. HÀM TIỆN ÍCH
    ================================================================ */
 const randInt = n => Math.floor(Math.random() * n);
@@ -727,11 +821,24 @@ function renderChoiceContent(el, item) {
     const img = document.createElement("img");
     img.src = item.img;
     img.alt = item.word;
-    img.onerror = () => { el.textContent = item.emoji; };
+    img.onerror = () => { el.textContent = item.emoji || "❓"; };
     el.appendChild(img);
   } else {
-    el.textContent = item.emoji;
+    el.textContent = item.emoji || "❓";
   }
+}
+
+function getWordStat(word) {
+  if (!memory.wordStats[word]) memory.wordStats[word] = { correct: 0, wrong: 0, lastSeen: 0 };
+  return memory.wordStats[word];
+}
+function getWordWeakness(word) {
+  const s = getWordStat(word);
+  const total = s.correct + s.wrong;
+  if (total === 0) return 1.5;
+  const accuracy = s.correct / total;
+  const hoursSince = (Date.now() - s.lastSeen) / 3600000;
+  return (1 - accuracy) * 3 + Math.min(hoursSince / 24, 2) + s.wrong * 0.5;
 }
 
 const PRAISE_TEXTS = [
@@ -743,11 +850,22 @@ const PRAISE_TEXTS = [
   "✨ Waooo, bé giỏi! ✨"
 ];
 
+/* Toast */
+let toastTimer = null;
+function showToast(msg, type = "success") {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = "show " + type;
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = ""; }, 2500);
+}
+
 /* ================================================================
    5. LOGIC GAME
    ================================================================ */
 const menuScreen = document.getElementById("menuScreen");
 const gameScreen = document.getElementById("gameScreen");
+const manageScreen = document.getElementById("manageScreen");
 const topicsGrid = document.getElementById("topicsGrid");
 const topicBadge = document.getElementById("topicBadge");
 const speakerBtn = document.getElementById("speakerBtn");
@@ -760,6 +878,7 @@ const hintEl     = document.getElementById("hint");
 const praiseEl   = document.getElementById("praise");
 const btnBack    = document.getElementById("btnBack");
 const resetBtn   = document.getElementById("resetBtn");
+const settingsBtn = document.getElementById("settingsBtn");
 
 let currentWord = null;
 let currentChoices = [];
@@ -769,15 +888,104 @@ let wrongThisRound = 0;
 
 function showMenu() {
   gameScreen.classList.remove("active");
+  manageScreen.classList.remove("active");
   menuScreen.style.display = "flex";
   renderTopicsGrid();
   speechSynthesis.cancel();
+}
+
+function showManage() {
+  gameScreen.classList.remove("active");
+  menuScreen.style.display = "none";
+  manageScreen.classList.add("active");
+  populateTopicSelect();
+  renderWordList();
+  speechSynthesis.cancel();
+}
+
+function populateTopicSelect() {
+  const sel = document.getElementById("topicSelect");
+  sel.innerHTML = "";
+  for (const key in TOPICS) {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = TOPICS[key].emoji + " " + TOPICS[key].name;
+    sel.appendChild(opt);
+  }
+  sel.value = memory.currentTopic;
+}
+
+function renderWordList() {
+  const topicKey = document.getElementById("topicSelect").value;
+  const topic = TOPICS[topicKey];
+  const list = document.getElementById("wordList");
+  list.innerHTML = "";
+
+  if (!topic || !topic.words || topic.words.length === 0) {
+    list.innerHTML = '<div class="empty-state">📭 Chưa có từ vựng nào trong chủ đề này</div>';
+    return;
+  }
+
+  topic.words.forEach((w, idx) => {
+    const card = document.createElement("div");
+    card.className = "word-item";
+
+    const emojiDiv = document.createElement("div");
+    emojiDiv.className = "word-emoji";
+    if (w.img) {
+      const img = document.createElement("img");
+      img.src = w.img;
+      img.onerror = () => { emojiDiv.textContent = w.emoji || "❓"; };
+      emojiDiv.appendChild(img);
+    } else {
+      emojiDiv.textContent = w.emoji || "❓";
+    }
+
+    const wordDiv = document.createElement("div");
+    wordDiv.className = "word-text";
+    wordDiv.textContent = w.word;
+
+    const viDiv = document.createElement("div");
+    viDiv.className = "word-vi";
+    viDiv.textContent = w.vi || "";
+
+    const ipaDiv = document.createElement("div");
+    ipaDiv.className = "word-ipa";
+    ipaDiv.textContent = w.ipa || "";
+
+    const delBtn = document.createElement("button");
+    delBtn.className = "delete-btn";
+    delBtn.textContent = "✕";
+    delBtn.onclick = (e) => {
+      e.stopPropagation();
+      deleteWord(topicKey, idx);
+    };
+
+    card.appendChild(delBtn);
+    card.appendChild(emojiDiv);
+    card.appendChild(wordDiv);
+    if (w.vi) card.appendChild(viDiv);
+    if (w.ipa) card.appendChild(ipaDiv);
+
+    list.appendChild(card);
+  });
+}
+
+function deleteWord(topicKey, idx) {
+  const topic = TOPICS[topicKey];
+  const w = topic.words[idx];
+  if (!confirm('Xoá từ "' + w.word + '" ?')) return;
+  topic.words.splice(idx, 1);
+  saveCustomWords();
+  renderWordList();
+  showToast("Đã xoá: " + w.word);
 }
 
 async function startTopic(topicKey) {
   memory.currentTopic = topicKey;
   saveMemory();
   menuScreen.style.display = "none";
+  manageScreen.classList.remove("active");
   gameScreen.classList.add("active");
 
   const topic = TOPICS[topicKey];
@@ -898,7 +1106,7 @@ async function newRound() {
   hintEl.textContent = "👂 Nghe và chọn hình đúng nhé!";
   hintEl.classList.remove("urgent");
 
-  await speakWord(correctWord.word, 0.8);
+  await speakWord(correctWord.word, 0.85);
 
   setTimeout(() => {
     if (!locked && currentWord && wrongThisRound === 0) {
@@ -973,23 +1181,206 @@ speakerBtn.addEventListener("click", () => {
     ipaDisplay.classList.add("show");
   }
 
-  speakWord(currentWord.word).then(() => {
+  speakWord(currentWord.word, 0.7).then(() => {
     speakerBtn.classList.remove("playing");
     setTimeout(() => ipaDisplay.classList.remove("show"), 1500);
   });
 });
 
 btnBack.addEventListener("click", showMenu);
+settingsBtn.addEventListener("click", showManage);
+document.getElementById("btnBackFromManage").addEventListener("click", showMenu);
 
 resetBtn.addEventListener("click", () => {
-  if (confirm("Xoá toàn bộ tiến độ và chơi lại từ đầu?")) {
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
+  if (confirm("Xoá điểm và tiến độ học (KHÔNG xoá từ vựng đã thêm)?")) {
+    memory.score = 0;
+    memory.streak = 0;
+    memory.totalCorrect = 0;
+    memory.totalWrong = 0;
+    memory.level = 1;
+    memory.wordStats = {};
+    saveMemory();
+    updateStats();
+    showToast("Đã reset điểm và tiến độ");
+    if (gameScreen.classList.contains("active")) newRound();
   }
 });
 
 /* ================================================================
-   6. PHÁO HOA
+   6. FORM THÊM TỪ VỰNG
+   ================================================================ */
+const addForm = document.getElementById("addForm");
+const inputWord = document.getElementById("inputWord");
+const inputIpa = document.getElementById("inputIpa");
+const inputVi = document.getElementById("inputVi");
+const inputEmoji = document.getElementById("inputEmoji");
+const imageInput = document.getElementById("imageInput");
+const imagePreview = document.getElementById("imagePreview");
+const btnClearImage = document.getElementById("btnClearImage");
+
+let currentImageData = null;  // base64 hoặc null
+
+document.getElementById("btnShowAddForm").addEventListener("click", () => {
+  addForm.classList.toggle("active");
+  if (addForm.classList.contains("active")) {
+    inputWord.focus();
+  }
+});
+
+document.getElementById("btnCancelAdd").addEventListener("click", resetAddForm);
+
+function resetAddForm() {
+  inputWord.value = "";
+  inputIpa.value = "";
+  inputVi.value = "";
+  inputEmoji.value = "";
+  imageInput.value = "";
+  currentImageData = null;
+  imagePreview.innerHTML = "🍎";
+  btnClearImage.style.display = "none";
+  addForm.classList.remove("active");
+}
+
+inputEmoji.addEventListener("input", () => {
+  if (!currentImageData) {
+    imagePreview.textContent = inputEmoji.value || "🍎";
+  }
+});
+
+imageInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 500 * 1024) {
+    showToast("⚠️ Ảnh lớn hơn 500KB. Nên chọn ảnh nhỏ hơn để lưu nhanh.", "error");
+  }
+
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    currentImageData = ev.target.result;  // base64 data URL
+    imagePreview.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = currentImageData;
+    imagePreview.appendChild(img);
+    btnClearImage.style.display = "inline-block";
+  };
+  reader.readAsDataURL(file);
+});
+
+btnClearImage.addEventListener("click", () => {
+  currentImageData = null;
+  imageInput.value = "";
+  imagePreview.textContent = inputEmoji.value || "🍎";
+  btnClearImage.style.display = "none";
+});
+
+document.getElementById("btnSaveWord").addEventListener("click", () => {
+  const word = inputWord.value.trim();
+  const ipa = inputIpa.value.trim();
+  const vi = inputVi.value.trim();
+  const emoji = inputEmoji.value.trim();
+
+  if (!word) {
+    showToast("⚠️ Cần nhập từ tiếng Anh", "error");
+    inputWord.focus();
+    return;
+  }
+  if (!currentImageData && !emoji) {
+    showToast("⚠️ Cần chọn ảnh HOẶC nhập emoji", "error");
+    return;
+  }
+
+  const topicKey = document.getElementById("topicSelect").value;
+  if (!TOPICS[topicKey]) {
+    showToast("⚠️ Chủ đề không tồn tại", "error");
+    return;
+  }
+
+  // Kiểm tra trùng
+  if (TOPICS[topicKey].words.some(w => w.word.toLowerCase() === word.toLowerCase())) {
+    showToast('⚠️ Từ "' + word + '" đã có trong chủ đề này', "error");
+    return;
+  }
+
+  const newWord = { word };
+  if (ipa) newWord.ipa = ipa;
+  if (vi) newWord.vi = vi;
+  if (currentImageData) {
+    newWord.img = currentImageData;
+    newWord.emoji = emoji || "🖼️";   // fallback nếu ảnh lỗi
+  } else {
+    newWord.emoji = emoji;
+  }
+
+  TOPICS[topicKey].words.push(newWord);
+  saveCustomWords();
+
+  showToast('✅ Đã thêm: ' + word);
+  resetAddForm();
+  renderWordList();
+});
+
+/* ================================================================
+   7. XUẤT / NHẬP / XOÁ
+   ================================================================ */
+document.getElementById("btnExport").addEventListener("click", () => {
+  const custom = localStorage.getItem(CUSTOM_KEY) || "{}";
+  const blob = new Blob([custom], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "be-hoc-tieng-anh-tuvung-" + new Date().toISOString().slice(0, 10) + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("📤 Đã xuất file backup");
+});
+
+document.getElementById("importInput").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      // Merge vào custom hiện tại
+      let existing = {};
+      try {
+        existing = JSON.parse(localStorage.getItem(CUSTOM_KEY) || "{}");
+      } catch (e) {}
+
+      for (const topicKey in data) {
+        if (!existing[topicKey]) {
+          existing[topicKey] = data[topicKey];
+        } else if (Array.isArray(data[topicKey])) {
+          // Merge mảng từ
+          existing[topicKey] = existing[topicKey].concat(data[topicKey]);
+        }
+      }
+      localStorage.setItem(CUSTOM_KEY, JSON.stringify(existing));
+      showToast("📥 Đã nhập file. Đang tải lại...");
+      setTimeout(() => location.reload(), 1200);
+    } catch (err) {
+      showToast("❌ File không hợp lệ", "error");
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+document.getElementById("btnResetAll").addEventListener("click", () => {
+  if (confirm("Xoá TẤT CẢ từ vựng đã thêm và tiến độ học? Không thể hoàn tác!")) {
+    if (confirm("Chắc chắn chưa? Hành động này không thể hoàn tác!")) {
+      localStorage.removeItem(CUSTOM_KEY);
+      localStorage.removeItem(MEMORY_KEY);
+      location.reload();
+    }
+  }
+});
+
+document.getElementById("topicSelect").addEventListener("change", renderWordList);
+
+/* ================================================================
+   8. PHÁO HOA
    ================================================================ */
 const canvas = document.getElementById("fireworks");
 const ctx2d  = canvas.getContext("2d");
@@ -1026,7 +1417,7 @@ function createBurst(x, y) {
     const angle = (Math.PI * 2 * i) / count + Math.random() * 0.25;
     const speed = 2.2 + Math.random() * 4.2;
     sparks.push({
-      x: x, y: y,
+      x, y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       life: 1,
@@ -1039,7 +1430,7 @@ function createBurst(x, y) {
     const angle = Math.random() * Math.PI * 2;
     const speed = 1 + Math.random() * 2.5;
     sparks.push({
-      x: x, y: y,
+      x, y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       life: 1,
@@ -1082,7 +1473,7 @@ function animateFireworks() {
 }
 
 /* ================================================================
-   7. CHỮ KHEN
+   9. CHỮ KHEN
    ================================================================ */
 function showPraise() {
   praiseEl.textContent = PRAISE_TEXTS[randInt(PRAISE_TEXTS.length)];
@@ -1092,10 +1483,10 @@ function showPraise() {
 }
 
 /* ================================================================
-   8. KHỞI ĐỘNG
+   10. KHỞI ĐỘNG
    ================================================================ */
 window.addEventListener("load", () => {
-  loadMemory();
+  loadAll();
 
   document.body.addEventListener("pointerdown", function unlock() {
     try { getAudioCtx().resume(); } catch (e) {}
